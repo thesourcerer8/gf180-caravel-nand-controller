@@ -100,14 +100,16 @@ module user_proj_example #(
     assign clk = (~la_oenb[62]) ? la_data_in[62]: wb_clk_i;
     assign rst = (~la_oenb[63]) ? la_data_in[63]: wb_rst_i;
 
-    counter #(
+    
+
+    nand_wishbone #(
         .BITS(BITS)
     ) counter(
         .clk(clk),
-        .reset(rst),
+        .resetn(rst),
         .ready(wbs_ack_o),
         .valid(valid),
-        .rdata(rdata),
+        .rdata(readdata),
         .wdata(wbs_dat_i[BITS-1:0]),
         .wstrb(wstrb),
         .la_write(la_write),
